@@ -115,9 +115,16 @@ $rz_screen_open_txt" 1
 			then
 				mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
 				$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.png" "$rz_serv/$rz_packtype/$rz_packtoget/screens/$num.png"
+				IMGtype="png"
+			fi
+			if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.png" ]
+			then
+				mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
+				$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.jpg" "$rz_serv/$rz_packtype/$rz_packtoget/screens/$num.jpg"
+				IMGtype="jpg"
 			fi
 		showNotify "repoZITO" "$rz_start_download" 1 1
-		$imgviewer -d "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.png"
+		$imgviewer -d "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.$IMGtype"
 		let num=$num+1
 		done
 	fi

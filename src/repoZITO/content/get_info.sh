@@ -36,9 +36,10 @@ rz_dogetinfo()
 	rz_packversion=`grep "^version = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^version = ,,"`
 	rz_packlng=`grep "^lng = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^lng = ,,"`
 	rz_check_pep=`grep "^pep.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^pep.$rz_model = ,,"`
-	if [ "$rz_check_pep" = "true" ]; then rzPEPMGXZPK="PEP"; else rzPEPMGXZPK="MGX";fi
-	rz_check_zpk=`grep "^zpk.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^zpk.$rz_model = ,,"`
-	if [ "$rz_check_zpk" = "true" ]; then rzPEPMGXZPK="ZPK"; else rzPEPMGXZPK="MGX";fi
+	if [ "$rz_check_pep" = "true" ]
+	then rzPEPMGXZPK="PEP";else rz_check_zpk=`grep "^zpk.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^zpk.$rz_model = ,,"`
+		if [ "$rz_check_zpk" = "true" ];then rzPEPMGXZPK="ZPK";else rzPEPMGXZPK="MGX";fi
+	fi
 	showQ "info about $rz_packtoget" "========
 $rz_info
 ========

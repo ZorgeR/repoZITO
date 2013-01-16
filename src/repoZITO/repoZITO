@@ -64,7 +64,7 @@ then
 
 	# создаем новый конфиг для netexec
 	echo -ne "[NetExecConfig]
-Command = $repoz_mypath/init" > $repoz_mypath/netexec.ini
+Command = $repoz_mypath/repoZITO" > $repoz_mypath/netexec.ini
 	
 	# тач
 	touch $repoz_mypath/netexec.fxd

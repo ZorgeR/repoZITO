@@ -37,9 +37,9 @@ rz_zpk="/ezxlocal/download/mystuff/.zmodstuff/zpk/parse"
 # find mpkg/pkg
 rz_mpkg="/mmc/mmca1/.system/FsMan/plugins/Installer/Installer"
 # find WGET
-# for stupid mosterpack (for monsterpack wich haven't wget)
-# rz_wget="/bin/busybox wget"
-rz_wget="wget"
+# for stupid monsterpack (for monsterpack wich haven't wget)
+rz_wget="/bin/busybox wget"
+# rz_wget="wget"
 # find curent server
 rz_serv=`cat $repoz_content/reposerv`
 # find version

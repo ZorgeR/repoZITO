@@ -57,7 +57,7 @@ rz_MPmodel=`cat /ezxlocal/MPmodel`
 ######################
 # NetCONFIG FIX start#
 ######################
-if [ ! -f "$repoz_mypath/netexec.fxd" ]
+if [ ! -f "$repoz_mypath/netexec.ini.fxd" ]
 then
 	# удаляем старый netexec.ini
 	rm $repoz_mypath/netexec.ini
@@ -67,7 +67,7 @@ then
 Command = $repoz_mypath/repoZITO" > $repoz_mypath/netexec.ini
 	
 	# тач
-	touch $repoz_mypath/netexec.fxd
+	touch "$repoz_mypath/netexec.ini.fxd"
 fi
 ######################
 # NetCONFIG FIX end#

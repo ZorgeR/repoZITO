@@ -10,6 +10,10 @@
 
 find $repoz_tmp/* -name *.mgx | xargs rm
 find $repoz_tmp/* -name *.txt | xargs rm
+find $repoz_tmp/* -name *.zpk | xargs rm
+find $repoz_tmp/* -name *.pep | xargs rm
+find $repoz_tmp/* -name *.pkg | xargs rm
+find $repoz_tmp/* -name *.mpkg | xargs rm
 find $repoz_tmp/* -name *info | xargs rm
 find $repoz_tmp/* -name *ver | xargs rm
 

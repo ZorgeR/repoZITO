@@ -17,6 +17,8 @@ find $repoz_tmp/* -name *.txt | xargs rm
 find $repoz_tmp/* -name *.zpk | xargs rm
 find $repoz_tmp/* -name *.pep | xargs rm
 find $repoz_tmp/* -name *.pkg | xargs rm
+find $repoz_tmp/* -name *.png | xargs rm
+find $repoz_tmp/* -name *.jpg | xargs rm
 find $repoz_tmp/* -name *ver | xargs rm
 
 showQ "$rz_cache_head" "$rz_cache_complete" 2

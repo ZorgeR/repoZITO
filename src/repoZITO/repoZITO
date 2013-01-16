@@ -8,14 +8,6 @@
 # Copyright - Zorge.R - 2010 - motofan.ru
 #
 
-# check phone model
-rz_model=`cat /etc/modelnum.txt`
-
-# find rokr2 or mgxparser
-if [ -f /mmc/movinand1/.zmodstuff/unarc/mgxparser ]; then rz_rokr2="/mmc/movinand1/.zmodstuff/unarc/mgxparser"; else rz_rokr2=`busybox find /usr  -name rokr2`; fi
-# find PEP
-rz_pep="/ezxlocal/download/mystuff/.system/PEM/PEManager"
-
 ####################
 # Path block start #
 ####################
@@ -30,6 +22,31 @@ rz_pep="/ezxlocal/download/mystuff/.system/PEM/PEManager"
 ##################
 # Path block end #
 ##################
+
+####################
+# Find block start #
+####################
+# check phone model
+rz_model=`cat /etc/modelnum.txt`
+# find rokr2 or mgxparser
+if [ -f /mmc/movinand1/.zmodstuff/unarc/mgxparser ]; then rz_rokr2="/mmc/movinand1/.zmodstuff/unarc/mgxparser"; else rz_rokr2=`busybox find /usr  -name rokr2`; fi
+# find PEP
+rz_pep="/ezxlocal/download/mystuff/.system/PEM/PEManager"
+# find ZPK
+rz_zpk="/ezxlocal/download/mystuff/.zmodstuff/zpk/parse"
+# find WGET
+# for stupid mosterpack (for monsterpack wich haven't wget)
+# rz_wget="/bin/busybox wget"
+rz_wget="wget"
+# find curent server
+rz_serv=`cat $repoz_content/reposerv`
+# find version
+rz_curvers=`cat $repoz_content/repovers`
+# find MP model
+rz_MPmodel=`cat /ezxlocal/MPmodel`
+####################
+#  Find block end  #
+####################
 
 ####################
 # Lang block start #

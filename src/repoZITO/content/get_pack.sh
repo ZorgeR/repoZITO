@@ -12,18 +12,6 @@ rz_packtoget=$rz_packname
 rz_postfix=`grep "^$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^$rz_model = ,,"`
 rz_md5sum=`grep "^md5sum.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^md5sum.$rz_model = ,,"`
 
-### Installation block ####
-rzdoinstallMGX()
-{
-	$rz_rokr2 -o "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
-}
-
-rzdoinstallPEP()
-{
-	$rz_pep -o "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
-}
-### Installation block ####
-
 showNotify "repoZITO" "$rz_start_download" 1 1
 
 if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" ]
@@ -44,14 +32,12 @@ then
 			else
 				showNotify "repoZITO" "$rz_MD5_check_FINISH" 0 1
 				# INSTALL
-				rzcheckPEP
-				rzdoinstall$rzPEPMGX
+				rzdoinstall$rzPEPMGXZPK
 				# INSTALL
 			fi
 		else
 			# INSTALL
-			rzcheckPEP
-			rzdoinstall$rzPEPMGX
+			rzdoinstall$rzPEPMGXZPK
 			# INSTALL
 
 		fi
@@ -60,8 +46,7 @@ then
 else
 	
 # INSTALL
-rzcheckPEP
-rzdoinstall$rzPEPMGX
+rzdoinstall$rzPEPMGXZPK
 # INSTALL
 
 fi

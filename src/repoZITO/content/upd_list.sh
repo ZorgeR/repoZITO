@@ -8,23 +8,11 @@
 # Copyright - Zorge.R - 2010 - motofan.ru
 #
 
-showRadio "repoZITO" "$rz_list_header" "$rz_list_app" "$rz_list_game" "$rz_list_upd"
-listsel=$?
-if [ $listsel -eq 1 ]
-then
-	rz_packtype="app"
-elif [ $listsel -eq 2 ]
-then
-	rz_packtype="game"
-elif [ $listsel -eq 3 ]
-then
-	rz_packtype="patch"
-else
-	exit
-fi
+rzlistafterselect()
+{
 
 showNotify "repoZITO" "$rz_start_download" 1 1
-$rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_model
+if [ "$rz_packtype" = "patch" ];then $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_MPmodel;else $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_model;fi
 showNotify "repoZITO" "$rz_download_complete" 0 1
 
 rz_list=`cat $repoz_tmp/list`
@@ -40,4 +28,22 @@ else
 	showQ "repoZITO" "$rz_pack_selected - $rz_packname" 2
 	. $repoz_content/get_info.sh
 fi
+}
 
+showRadio "repoZITO" "$rz_list_header" "$rz_list_app" "$rz_list_game" "$rz_list_upd"
+listsel=$?
+if [ $listsel -eq 1 ]
+then
+	rz_packtype="app"
+	rzlistafterselect
+elif [ $listsel -eq 2 ]
+then
+	rz_packtype="game"
+	rzlistafterselect
+elif [ $listsel -eq 3 ]
+then
+	rz_packtype="patch"
+	rzlistafterselect
+else
+	. $repoz_content/repoZITO.sh
+fi

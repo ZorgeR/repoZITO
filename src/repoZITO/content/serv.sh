@@ -17,8 +17,8 @@ ret=$?
 
 case $ret in
 	1)	
-		rz_newserv=`showTextEntry repoZITO "$rz_newserv_enter"`
-		echo -ne "$rz_newserv" >$repoz_content/reposerv
+		rz_newserv=`showTextEntry "$repoz_content/reposerv" "repoZITO" "$rz_newserv_enter" 0`
+		#echo -ne "$rz_newserv" >$repoz_content/reposerv
 		showQ "$rz_newserv_compl" "$rz_newserv_compl_txt - $rz_newserv" 2
 		;;
 	*)

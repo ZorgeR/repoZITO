@@ -23,7 +23,17 @@ then
 	rz_packsize=`grep "^size = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^size = ,,"`
 	rz_packversion=`grep "^version = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^version = ,,"`
 	rz_packlng=`grep "^lng = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^lng = ,,"`
-	showQ "info about $rz_packtoget" "$rz_info $rz_size_txt $rz_packsize. $rz_vers_txt $rz_packversion. $rz_lng_txt $rz_packlng. $rz_inst_NOW" 1
+	rz_check_pep=`grep "^pep.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^pep.$rz_model = ,,"`
+	if [ "$rz_check_pep" = "true" ]; then rzPEPMGX="PEP"; else rzPEPMGX="MGX";fi
+	showQ "info about $rz_packtoget" "========
+$rz_info
+========
+$rz_size_txt: $rz_packsize.
+$rz_vers_txt: $rz_packversion.
+$rz_lng_txt: $rz_packlng.
+$rz_packtype_txt: $rzPEPMGX.
+========
+$rz_inst_NOW" 1
 	retr=$?
 	if [ $retr -eq 1 ]
 	then
@@ -37,7 +47,15 @@ else
 	rz_packsize=`grep "^size = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^size = ,,"`
 	rz_packversion=`grep "^version = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^version = ,,"`
 	rz_packlng=`grep "^lng = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^lng = ,,"`
-	showQ "info about $rz_packtoget" "$rz_info $rz_size_txt $rz_packsize. $rz_vers_txt $rz_packversion. $rz_lng_txt $rz_packlng. $rz_inst_NOW" 1
+	showQ "info about $rz_packtoget" "========
+$rz_info
+========
+$rz_size_txt: $rz_packsize.
+$rz_vers_txt: $rz_packversion.
+$rz_lng_txt: $rz_packlng.
+$rz_packtype_txt: $rzPEPMGX.
+========
+$rz_inst_NOW" 1
 	retr=$?
 	if [ $retr -eq 1 ]
 	then

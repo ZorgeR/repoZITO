@@ -10,7 +10,7 @@
 
 ifgprsON()
 {
-showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_mm_get_main_list" "$rz_mm_get_cache_list" "$rz_mm_server" "$rz_mm_check_upd" "$rz_mm_info"
+showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_mm_get_main_list" "$rz_mm_get_cache_list" "$rz_mm_news" "$rz_mm_server" "$rz_mm_cache_clear" "$rz_mm_check_upd" "$rz_mm_info"
 
 ret=$?
 [ $ret -eq 0 ] && exit
@@ -24,11 +24,15 @@ case $ret in
 		cached="true"
 		. $repoz_content/upd_list.sh
 		;;
-	3)	. $repoz_content/serv.sh
+	3)	. $repoz_content/news.sh
 		;;
-	4)	. $repoz_content/check_vers.sh
+	4)	. $repoz_content/serv.sh
 		;;
-	5)	. $repoz_content/about.sh
+	5)	. $repoz_content/tmp.sh
+		;;
+	6)	. $repoz_content/check_vers.sh
+		;;
+	7)	. $repoz_content/about.sh
 		;;
 	*)
 		;;
@@ -37,7 +41,7 @@ esac
 
 ifgprsOFF()
 {
-showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_mm_get_main_list" "$rz_mm_get_cache_list" "$rz_mm_server" "$rz_mm_check_upd" "$rz_mm_gprs" "$rz_mm_info"
+showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_mm_get_main_list" "$rz_mm_get_cache_list" "$rz_mm_news" "$rz_mm_server" "$rz_mm_cache_clear" "$rz_mm_check_upd" "$rz_mm_gprs" "$rz_mm_info"
 
 ret=$?
 [ $ret -eq 0 ] && exit
@@ -51,14 +55,18 @@ case $ret in
 		cached="true"
 		. $repoz_content/upd_list.sh
 		;;
-	3)	. $repoz_content/serv.sh
+	3)	. $repoz_content/news.sh
 		;;
-	4)	. $repoz_content/check_vers.sh
+	4)	. $repoz_content/serv.sh
 		;;
-	5)	if [ "$rz_model" = "EM30" ];then rz_model=E8;fi
+	5)	. $repoz_content/tmp.sh
+		;;
+	6)	. $repoz_content/check_vers.sh
+		;;
+	7)	if [ "$rz_model" = "EM30" ];then rz_model=E8;fi
 		if [ -f "$repoz_mypath/netexec.$rz_model" ];then $repoz_mypath/netexec.$rz_model;else showQ "$rz_gprs_head" "$rz_gprs_err" 2; . $repoz_content/repoZITO.sh;fi
 		;;
-	6)	. $repoz_content/about.sh
+	8)	. $repoz_content/about.sh
 		;;
 	*)
 		;;

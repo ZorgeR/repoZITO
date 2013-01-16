@@ -25,6 +25,11 @@ rzdoinstallZPK()
 {
 	$rz_zpk -o "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
 }
+
+rzdoinstallMPKG()
+{
+	$rz_mpkg -d "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
+}
 ### Installation block ####
 
 ### GET INFO BLOCK ###
@@ -36,9 +41,15 @@ rz_dogetinfo()
 	rz_packversion=`grep "^version = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^version = ,,"`
 	rz_packlng=`grep "^lng = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^lng = ,,"`
 	rz_check_pep=`grep "^pep.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^pep.$rz_model = ,,"`
+	rz_check_zpk=`grep "^zpk.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^zpk.$rz_model = ,,"`
+	rz_check_mpkg=`grep "^mpkg.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^mpkg.$rz_model = ,,"`
 	if [ "$rz_check_pep" = "true" ]
-	then rzPEPMGXZPK="PEP";else rz_check_zpk=`grep "^zpk.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^zpk.$rz_model = ,,"`
-		if [ "$rz_check_zpk" = "true" ];then rzPEPMGXZPK="ZPK";else rzPEPMGXZPK="MGX";fi
+	then rzPtype="PEP"
+	elif [ "$rz_check_zpk" = "true" ]
+	then rzPtype="ZPK"
+	elif [ "$rz_check_mpkg" = "true" ]
+	then rzPtype="MPKG"
+	else rzPtype="MGX"
 	fi
 	showQ "info about $rz_packtoget" "========
 $rz_info
@@ -46,7 +57,7 @@ $rz_info
 $rz_size_txt: $rz_packsize.
 $rz_vers_txt: $rz_packversion.
 $rz_lng_txt: $rz_packlng.
-$rz_packtype_txt: $rzPEPMGXZPK.
+$rz_packtype_txt: $rzPtype.
 ========
 $rz_inst_NOW" 1
 }

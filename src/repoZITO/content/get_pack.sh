@@ -32,12 +32,12 @@ then
 			else
 				showNotify "repoZITO" "$rz_MD5_check_FINISH" 0 1
 				# INSTALL
-				rzdoinstall$rzPEPMGXZPK
+				rzdoinstall$rzPtype
 				# INSTALL
 			fi
 		else
 			# INSTALL
-			rzdoinstall$rzPEPMGXZPK
+			rzdoinstall$rzPtype
 			# INSTALL
 
 		fi
@@ -46,7 +46,7 @@ then
 else
 	
 # INSTALL
-rzdoinstall$rzPEPMGXZPK
+rzdoinstall$rzPtype
 # INSTALL
 
 fi

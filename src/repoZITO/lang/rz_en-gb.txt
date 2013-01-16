@@ -16,8 +16,11 @@ rz_TAB_4="Check client upd"
 rz_TAB_5="About"
 rz_TAB_6="GPRS mode"
 ##
+rz_gprs_head="Error"
+rz_gprs_err="GPRS mode not available for you phone model, at this moment. Check for Updates."
+##
 rz_md5_err_head="Error md5"
-rz_md5_err_txt="the md5 hash does not match. Try to redownload package."
+rz_md5_err_txt="the md5 hash does not match. Try to re-download package."
 rz_MD5_check_STARTED="Checking MD5..."
 rz_MD5_check_FINISH="MD5 check success."
 ##

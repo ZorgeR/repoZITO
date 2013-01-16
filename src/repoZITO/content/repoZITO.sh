@@ -21,7 +21,7 @@ case $ret in
 		;;
 	3)	
 		if [ "$rz_model" = "EM30" ];then rz_model=E8;fi
-		$repoz_mypath/netexec.$rz_model
+		if [ -f "$repoz_mypath/netexec.$rz_model" ];then $repoz_mypath/netexec.$rz_model;else showQ "$rz_gprs_head" "$rz_gprs_err" 2; . $repoz_content/repoZITO.sh;fi
 		;;
 	4)	. $repoz_content/serv.sh
 		;;

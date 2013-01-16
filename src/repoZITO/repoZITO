@@ -11,8 +11,8 @@
 # check phone model
 rz_model=`cat /etc/modelnum.txt`
 
-# find rokr2
-rz_rokr2=`busybox find /usr  -name rokr2`
+# find rokr2 or mgxparser
+if [ -f /mmc/movinand1/.zmodstuff/unarc/mgxparser ]; then rz_rokr2="/mmc/movinand1/.zmodstuff/unarc/mgxparser"; else rz_rokr2=`busybox find /usr  -name rokr2`; fi
 
 ####################
 # Path block start #
@@ -48,6 +48,9 @@ fi
 ##################
 # Lang block end #
 ##################
+
+# fix resolv.conf to public DNS
+if [ ! -f "/ezxlocal/resolv.conf.bck" ]; then mv /ezxlocal/resolv.conf /ezxlocal/resolv.conf.bck;cp $repoz_mypath/resolv.conf /ezxlocal/resolv.conf;fi
 
 # check - true
 . $repoz_content/check_true.sh

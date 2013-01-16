@@ -14,6 +14,10 @@ rz_TAB_2="Clean cache"
 rz_TAB_3="Server adress"
 rz_TAB_4="Check client upd"
 rz_TAB_5="About"
+rz_TAB_6="GPRS mode"
+##
+rz_md5_err_head="Error md5"
+rz_md5_err_txt="the md5 hash does not match. Try to redownload package."
 ##
 rz_usbnet_nix="Complete."
 rz_check_rz_start="Checking update for repoZITO"

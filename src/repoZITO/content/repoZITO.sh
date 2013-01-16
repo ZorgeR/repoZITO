@@ -10,9 +10,11 @@
 
 rz_serv=`cat $repoz_content/reposerv`
 rz_curvers=`cat $repoz_content/repovers`
-rz_wget="/bin/busybox wget"
+# for stupid mosterpack (for monsterpack wich haven't wget)
+#rz_wget="/bin/busybox wget"
+rz_wget="wget"
 
-showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_TAB_1" "$rz_TAB_2" "$rz_TAB_3" "$rz_TAB_4" "$rz_TAB_5"
+showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_TAB_1" "$rz_TAB_2" "$rz_TAB_6" "$rz_TAB_3" "$rz_TAB_4" "$rz_TAB_5"
 
 ret=$?
 [ $ret -eq 0 ] && exit
@@ -22,11 +24,15 @@ case $ret in
 		;;
 	2)	. $repoz_content/tmp.sh
 		;;
-	3)	. $repoz_content/serv.sh
+	3)	
+		if [ "$rz_model" = "EM30" ];then rz_model=E8;fi
+		$repoz_mypath/netexec.$rz_model
 		;;
-	4)	. $repoz_content/check_vers.sh
+	4)	. $repoz_content/serv.sh
 		;;
-	5)	. $repoz_content/about.sh
+	5)	. $repoz_content/check_vers.sh
+		;;
+	6)	. $repoz_content/about.sh
 		;;
 	*)
 		;;

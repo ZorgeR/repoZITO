@@ -11,6 +11,10 @@
 rzlistafterselect()
 {
 
+# delete old lost
+rm $repoz_tmp/list
+# delete old list done
+
 showNotify "repoZITO" "$rz_start_download" 1 1
 if [ "$rz_packtype" = "patch" ];then $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_MPmodel;else $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_model;fi
 showNotify "repoZITO" "$rz_download_complete" 0 1

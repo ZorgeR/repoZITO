@@ -59,7 +59,7 @@ esac
 }
 
 # проверяем, активен ли GPRS mode
-checkNETexec=`pidof netexec.$ph_model`
+checkNETexec=`pidof netexec.$rz_model`
 
 if [ "$checkNETexec" != 0 ] && [ "$checkNETexec" != "" ]
 then

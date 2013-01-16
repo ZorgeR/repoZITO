@@ -45,6 +45,8 @@ rz_dogetinfo()
 	rz_packsize=`grep "^size = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^size = ,,"`
 	rz_packversion=`grep "^version = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^version = ,,"`
 	rz_packlng=`grep "^lng = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^lng = ,,"`
+	rz_author=`grep "^author = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^author = ,,"`
+	rz_screens=`grep "^screens = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^screens = ,,"`
 	rz_check_pep=`grep "^pep.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^pep.$rz_model = ,,"`
 	rz_check_zpk=`grep "^zpk.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^zpk.$rz_model = ,,"`
 	rz_check_mpkg=`grep "^mpkg.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^mpkg.$rz_model = ,,"`
@@ -65,23 +67,55 @@ $rz_info
 $rz_size_txt: $rz_packsize.
 $rz_vers_txt: $rz_packversion.
 $rz_lng_txt: $rz_packlng.
+$rz_author_txt: $rz_author.
 $rz_packtype_txt: $rzPtype.
 ========
 $rz_inst_NOW" 1
 }
 ### GET INFO BLOCK ###
 
+rz_dogetscreen()
+{
+### SCREENSHOT BLOCK ###
+
+if [ "$rz_screens" != 0 ] && [ "$rz_screens" != "" ]
+then
+	showQ "repoZITO" "$rz_screen_txt
+$rz_screen_num_txt: $rz_screens
+$rz_screen_open_txt" 1
+	screendo=$?
+	num=0
+	let rz_true_screen_num=$rz_screens-1
+	if [ $screendo -eq 1 ]
+	then
+		while [ $num -le $rz_true_screen_num ]
+		do
+			if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.png" ]
+			then
+				mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
+				$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.png" "$rz_serv/$rz_packtype/$rz_packtoget/screens/$num.png"
+			fi
+		showNotify "repoZITO" "$rz_start_download" 1 1
+		$imgviewer -d "$repoz_tmp/$rz_packtype/$rz_packtoget/$num.png"
+		let num=$num+1
+		done
+	fi
+fi
+### SCREENSHOT BLOCK ###
+}
+
 showNotify "repoZITO" "$rz_start_download" 1 1
 
 if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/info" ]
 then
 	mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
-	$rz_wget -O $repoz_tmp/$rz_packtype/$rz_packtoget/info $rz_serv/$rz_packtype/$rz_packtoget/i.nfo
+	$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/info" "$rz_serv/$rz_packtype/$rz_packtoget/i.nfo"
 	showNotify "repoZITO" "$rz_download_complete" 0 1
 	rz_dogetinfo
 	retr=$?
 	if [ $retr -eq 1 ]
 	then
+		rz_dogetscreen
 		. $repoz_content/get_pack.sh
 	else
 		. $repoz_content/upd_list.sh
@@ -91,6 +125,7 @@ else
 	retr=$?
 	if [ $retr -eq 1 ]
 	then
+		rz_dogetscreen
 		. $repoz_content/get_pack.sh
 	else
 		. $repoz_content/upd_list.sh

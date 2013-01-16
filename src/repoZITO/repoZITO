@@ -38,6 +38,8 @@ rz_zpk="/ezxlocal/download/mystuff/.zmodstuff/zpk/parse"
 rz_mpkg="/mmc/mmca1/.system/FsMan/plugins/Installer/Installer"
 # find mgs
 if [ -f /mmc/movinand1/.zmodstuff/unarc/mgsparser ]; then rz_mgs="/mmc/movinand1/.zmodstuff/unarc/mgsparser"; else rz_rokr2=`busybox find /usr  -name rokr2`; fi
+# find imageviewer
+imgviewer="/usr/bin/imageviewer"
 # find WGET
 # for stupid monsterpack (for monsterpack wich haven't wget)
 rz_wget="/bin/busybox wget"
@@ -51,6 +53,26 @@ rz_MPmodel=`cat /ezxlocal/MPmodel`
 ####################
 #  Find block end  #
 ####################
+
+######################
+# NetCONFIG FIX start#
+######################
+if [ ! -f "$repoz_mypath/netexec.fxd" ]
+then
+	# удаляем старый netexec.ini
+	rm $repoz_mypath/netexec.ini
+
+	# создаем новый конфиг для netexec
+	echo -ne "[NetExecConfig]
+Command = $repoz_mypath/init" > $repoz_mypath/netexec.ini
+	
+	# тач
+	touch $repoz_mypath/netexec.fxd
+fi
+######################
+# NetCONFIG FIX end#
+######################
+
 
 ####################
 # Lang block start #

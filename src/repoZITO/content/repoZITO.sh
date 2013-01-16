@@ -8,7 +8,31 @@
 # Copyright - Zorge.R - 2010 - motofan.ru
 #
 
+ifgprsON()
+{
+showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_TAB_1" "$rz_TAB_2" "$rz_TAB_3" "$rz_TAB_4" "$rz_TAB_5"
 
+ret=$?
+[ $ret -eq 0 ] && exit
+
+case $ret in
+	1)	. $repoz_content/upd_list.sh
+		;;
+	2)	. $repoz_content/tmp.sh
+		;;
+	3)	. $repoz_content/serv.sh
+		;;
+	4)	. $repoz_content/check_vers.sh
+		;;
+	5)	. $repoz_content/about.sh
+		;;
+	*)
+		;;
+esac
+}
+
+ifgprsOFF()
+{
 showRadio "$rz_NAME_APP" "r$rz_curvers" "$rz_TAB_1" "$rz_TAB_2" "$rz_TAB_6" "$rz_TAB_3" "$rz_TAB_4" "$rz_TAB_5"
 
 ret=$?
@@ -32,4 +56,15 @@ case $ret in
 	*)
 		;;
 esac
+}
+
+# проверяем, активен ли GPRS mode
+checkNETexec=`pidof netexec.$ph_model`
+
+if [ "$checkNETexec" != 0 ] && [ "$checkNETexec" != "" ]
+then
+	ifgprsON
+else
+	ifgprsOFF
+fi
 

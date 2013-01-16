@@ -1,0 +1,53 @@
+#!/bin/sh
+
+#
+# Z-Mod E8
+#
+# Please don't modify this code.
+#
+# Copyright - Zorge.R - 2010 - motofan.ru
+#
+
+# check phone model
+rz_model=`cat /etc/modelnum.txt`
+
+# find rokr2
+rz_rokr2=`busybox find /usr  -name rokr2`
+
+####################
+# Path block start #
+####################
+#--|root
+	repoz_mypath=${0%/*}
+#--|lang
+	repoz_lang=$repoz_mypath/lang
+#--|content
+	repoz_content=$repoz_mypath/content
+#--|tmp
+	repoz_tmp=$repoz_mypath/rz_tmp
+##################
+# Path block end #
+##################
+
+####################
+# Lang block start #
+####################
+#--|local upd
+LANGSTR=`grep '^LanguageType = ' /ezxlocal/download/appwrite/setup/ezx_system.cfg | sed 's,^LanguageType = ,,'`
+if [ "$LANGSTR" = "" ]
+then
+	LANGSTR="en-us"
+fi
+#--|upd lng file
+if [ ! -f "${repoz_lang}/rz_${LANGSTR}.txt" ]
+then
+	. "${repoz_lang}/rz_en-gb.txt"
+else
+	. "${repoz_lang}/rz_${LANGSTR}.txt"
+fi
+##################
+# Lang block end #
+##################
+
+# check - true
+. $repoz_content/check_true.sh

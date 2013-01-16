@@ -1,0 +1,58 @@
+
+##
+rz_NAME_APP="repoZITO"
+##
+rz_ZMOD_ERR="Can't find Busybox. Exit."
+##
+rz_list_header="Получить список:"
+rz_list_app="Приложений"
+rz_list_game="Игр"
+rz_list_upd="Обновлений и патчей"
+##
+rz_TAB_1="Select package"
+rz_TAB_2="Clean cache"
+rz_TAB_3="Server adress"
+rz_TAB_4="Check client upd"
+rz_TAB_5="About"
+##
+rz_usbnet_nix="Complete."
+rz_check_rz_start="Checking update for repoZITO"
+rz_check_rz_upd_need="New version available"
+rz_check_rz_upd_need2="Download, Wait please..."
+rz_check_rz_upd_dneed="You have latest version - repoZITO"
+##
+rz_HEAD_SERV="Curent server"
+rz_SERV_TAB_1="Change"
+rz_newserv_enter="Enter adress with http:// or ftp://"
+rz_newserv_compl="Complete"
+rz_newserv_compl_txt="New server is"
+##
+rz_Pack_on_server="Package on server"
+rz_pack_selected="selected pack is"
+rz_inst_NOW="Install NOW?"
+rz_size_txt="Size -"
+rz_vers_txt="Version -"
+rz_lng_txt="Language -"
+rz_ERROR="Error"
+rz_REPOZ_ERROR="Oops. It's not Your repository dir. Exit."
+##
+rz_start_download="Download started"
+rz_download_complete="Download comlete"
+##
+rz_Enter_name_pack="Enter name of package"
+##
+rz_cache_head="Cache"
+rz_cache_complete="Cache cleaned"
+##
+rz_get_name="$rz_NAME_APP"
+rz_get_header="Package control"
+rz_get_install="Get info about package"
+rz_get_install2="Install package"
+#rz_get_install3="Install package 3"
+#rz_get_install4="Install package 4"
+#rz_get_install5="Install package 5"
+##
+rz_COMMENT_HEADER="About"
+rz_COMMENT_TEXT="repoZITO - is repository client for Е8 and other moto magx phone. author - Zorge.R - motofan.ru"
+##
+

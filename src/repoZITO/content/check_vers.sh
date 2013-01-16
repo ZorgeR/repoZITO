@@ -10,7 +10,7 @@
 
 showNotify "repoZITO" "$rz_check_rz_start r$rz_curvers" 1 3
 mkdir -p $repoz_tmp/update/repoZITO
-$rz_wget -O $repoz_tmp/update/repoZITO/nextver $rz_serv/update/repoZITO/nextver
+$rz_wget -O $repoz_tmp/update/repoZITO/nextver $rz_serv/update/repoZITO/next.ver
 rz_nextvers=`cat $repoz_tmp/update/repoZITO/nextver`
 
 if [ $rz_nextvers -gt $rz_curvers ]

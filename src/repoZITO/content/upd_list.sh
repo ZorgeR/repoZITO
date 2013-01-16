@@ -16,7 +16,7 @@ rm $repoz_tmp/list
 # delete old list done
 
 showNotify "repoZITO" "$rz_start_download" 1 1
-if [ "$rz_packtype" = "patch" ];then $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_MPmodel;else $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_model;fi
+if [ "$rz_packtype" = "patch" ];then $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_MPmodel.list;else $rz_wget -O $repoz_tmp/list $rz_serv/$rz_packtype/$rz_model.list;fi
 showNotify "repoZITO" "$rz_download_complete" 0 1
 
 rz_list=`cat $repoz_tmp/list`
@@ -34,7 +34,7 @@ else
 fi
 }
 
-showRadio "repoZITO" "$rz_list_header" "$rz_list_app" "$rz_list_game" "$rz_list_upd"
+showRadio "repoZITO" "$rz_list_header" "$rz_list_app" "$rz_list_game" "$rz_list_patch" "$rz_list_upd" "$rz_list_skin"
 listsel=$?
 if [ $listsel -eq 1 ]
 then
@@ -47,6 +47,14 @@ then
 elif [ $listsel -eq 3 ]
 then
 	rz_packtype="patch"
+	rzlistafterselect
+elif [ $listsel -eq 4 ]
+then
+	rz_packtype="update"
+	rzlistafterselect
+elif [ $listsel -eq 5 ]
+then
+	rz_packtype="skin"
 	rzlistafterselect
 else
 	. $repoz_content/repoZITO.sh

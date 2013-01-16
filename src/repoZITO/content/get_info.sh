@@ -30,6 +30,11 @@ rzdoinstallMPKG()
 {
 	$rz_mpkg -d "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
 }
+
+rzdoinstallMGS()
+{
+	$rz_mgs -d "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
+}
 ### Installation block ####
 
 ### GET INFO BLOCK ###
@@ -43,12 +48,15 @@ rz_dogetinfo()
 	rz_check_pep=`grep "^pep.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^pep.$rz_model = ,,"`
 	rz_check_zpk=`grep "^zpk.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^zpk.$rz_model = ,,"`
 	rz_check_mpkg=`grep "^mpkg.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^mpkg.$rz_model = ,,"`
+	rz_check_mgs=`grep "^mgs.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^mgs.$rz_model = ,,"`
 	if [ "$rz_check_pep" = "true" ]
 	then rzPtype="PEP"
 	elif [ "$rz_check_zpk" = "true" ]
 	then rzPtype="ZPK"
 	elif [ "$rz_check_mpkg" = "true" ]
 	then rzPtype="MPKG"
+	elif [ "$rz_check_mgs" = "true" ]
+	then rzPtype="MGS"
 	else rzPtype="MGX"
 	fi
 	showQ "info about $rz_packtoget" "========
@@ -68,7 +76,7 @@ showNotify "repoZITO" "$rz_start_download" 1 1
 if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/info" ]
 then
 	mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
-	$rz_wget -O $repoz_tmp/$rz_packtype/$rz_packtoget/info $rz_serv/$rz_packtype/$rz_packtoget/info
+	$rz_wget -O $repoz_tmp/$rz_packtype/$rz_packtoget/info $rz_serv/$rz_packtype/$rz_packtoget/i.nfo
 	showNotify "repoZITO" "$rz_download_complete" 0 1
 	rz_dogetinfo
 	retr=$?

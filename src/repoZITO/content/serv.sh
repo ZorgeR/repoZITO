@@ -18,6 +18,7 @@ ret=$?
 case $ret in
 	1)	
 		rz_newserv=`showTextEntry "$repoz_content/reposerv" "repoZITO" "$rz_newserv_enter" 0`
+		if [ $rz_model = E2 ];then echo "$rz_newserv" > $repoz_content/reposerv;fi
 		rz_newserv_txt=`cat $repoz_content/reposerv`
 		showQ "$rz_newserv_compl" "$rz_newserv_compl_txt - $rz_newserv_txt" 2
 		;;

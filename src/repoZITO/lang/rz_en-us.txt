@@ -11,17 +11,26 @@ rz_list_patch="Patch's"
 rz_list_upd="Update's"
 rz_list_skin="Skin's"
 ##
-rz_TAB_1="Select package"
-rz_TAB_2="Clean cache"
-rz_TAB_3="Server adress"
-rz_TAB_4="Check client upd"
-rz_TAB_5="About"
-rz_TAB_6="GPRS mode"
+rz_mm_get_main_list="Select package"
+rz_mm_get_cache_list="Clean cache"
+rz_mm_server="Server adress"
+rz_mm_check_upd="Check client upd"
+rz_mm_info="About"
+rz_mm_gprs="GPRS mode"
 ##
 rz_gprs_head="Error"
 rz_gprs_err="GPRS mode not available for you phone model, at this moment. Check for Updates."
 ##
+rz_cache_not_found_txt="Cant find file in cache. Download from internet?"
+rz_cache_found_txt="This file, found in cache. Download from internet anyway?"
+##
+rz_get_info_install="Install NOW"
+rz_get_info_screen="Screenshots"
+##
+rz_screen_not_found="Cant find screenshot for this app."
+##
 rz_md5_err_head="Error md5"
+rz_md5_inet_err="Cant get md5sum from server. Check Internet connection."
 rz_md5_err_txt="the md5 hash does not match. Try to re-download package."
 rz_MD5_check_STARTED="Checking MD5..."
 rz_MD5_check_FINISH="MD5 check success."

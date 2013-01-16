@@ -61,7 +61,7 @@ rz_dogetinfo()
 	then rzPtype="MGS"
 	else rzPtype="MGX"
 	fi
-	showQ "info about $rz_packtoget" "========
+	showRadio "info about $rz_packtoget" "========
 $rz_info
 ========
 $rz_size_txt: $rz_packsize.
@@ -69,10 +69,31 @@ $rz_vers_txt: $rz_packversion.
 $rz_lng_txt: $rz_packlng.
 $rz_author_txt: $rz_author.
 $rz_packtype_txt: $rzPtype.
-========
-$rz_inst_NOW" 1
+========" "$rz_get_info_install" "$rz_get_info_screen"
 }
 ### GET INFO BLOCK ###
+
+rz_getinfoonline()
+{
+	showNotify "repoZITO" "$rz_start_download" 1 1
+	mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
+	$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/info" "$rz_serv/$rz_packtype/$rz_packtoget/i.nfo"
+	showNotify "repoZITO" "$rz_download_complete" 0 1
+}
+
+rz_getinfocache()
+{
+if [ ! -f $repoz_tmp/$rz_packtype/$rz_packtoget/info ]; then showQ "repoZITO" "$rz_cache_not_found_txt" 1
+rzcachefl=$?
+if [ "$rzcachefl" = "1" ]
+then
+	mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
+	$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/info" "$rz_serv/$rz_packtype/$rz_packtoget/i.nfo"
+else
+. $repoz_content/upd_list.sh -afterselect
+fi
+fi
+}
 
 rz_dogetscreen()
 {
@@ -100,37 +121,31 @@ $rz_screen_open_txt" 1
 		let num=$num+1
 		done
 	fi
+else
+showQ "repoZITO" "$rz_screen_not_found" 2
 fi
 ### SCREENSHOT BLOCK ###
 }
 
-showNotify "repoZITO" "$rz_start_download" 1 1
 
-if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/info" ]
+if [ "$cached" = "false" ]
 then
-	mkdir -p $repoz_tmp/$rz_packtype/$rz_packtoget
-	$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/info" "$rz_serv/$rz_packtype/$rz_packtoget/i.nfo"
-	showNotify "repoZITO" "$rz_download_complete" 0 1
-	rz_dogetinfo
-	retr=$?
-	if [ $retr -eq 1 ]
-	then
-		rz_dogetscreen
-		. $repoz_content/get_pack.sh
-	else
-		. $repoz_content/upd_list.sh
-	fi
+rz_getinfoonline
 else
-	rz_dogetinfo
-	retr=$?
-	if [ $retr -eq 1 ]
-	then
-		rz_dogetscreen
-		. $repoz_content/get_pack.sh
-	else
-		. $repoz_content/upd_list.sh
-	fi
+rz_getinfocache
 fi
 
+	rz_dogetinfo
 
+	retr=$?
+	if [ "$retr" -eq "1" ]
+	then
+		. $repoz_content/get_pack.sh
+	elif [ "$retr" -eq "2" ]
+	then
+		rz_dogetscreen
+		. $repoz_content/get_info.sh
+	else
+		. $repoz_content/upd_list.sh -afterselect
+	fi
 

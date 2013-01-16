@@ -12,13 +12,45 @@ rz_packtoget=$rz_packname
 rz_postfix=`grep "^$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^$rz_model = ,,"`
 rz_md5sum=`grep "^md5sum.$rz_model = " "$repoz_tmp/$rz_packtype/$rz_packtoget/info" | sed "s,^md5sum.$rz_model = ,,"`
 
-showNotify "repoZITO" "$rz_start_download" 1 1
 
-if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" ]
+rz_getapponline()
+{
+if [ -f "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" ]
+then
+	showQ "repoZITO" "$rz_cache_found_txt" 1
+	rzgetappfromcache=$?
+	if [ "$rzgetappfromcache" = "1" ]
+	then
+	mkdir -p "$repoz_tmp/$rz_packtype/$rz_packtoget"
+	showNotify "repoZITO" "$rz_start_download" 1 1
+	rm "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
+	$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" "$rz_serv/$rz_packtype/$rz_packtoget/$rz_postfix"
+	showNotify "repoZITO" "$rz_download_complete" 0 1
+	fi
+else
+	showNotify "repoZITO" "$rz_start_download" 1 1
+	rm "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix"
+	$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" "$rz_serv/$rz_packtype/$rz_packtoget/$rz_postfix"
+	showNotify "repoZITO" "$rz_download_complete" 0 1
+fi
+}
+
+rz_getappcache()
+{
+if [ ! -f "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" ]; then showQ "repoZITO" "$rz_cache_not_found_txt" 1
+rzcacheapp=$?
+if [ "$rzcacheapp" = "1" ]
 then
 	mkdir -p "$repoz_tmp/$rz_packtype/$rz_packtoget"
-		$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" "$rz_serv/$rz_packtype/$rz_packtoget/$rz_postfix"
-		showNotify "repoZITO" "$rz_download_complete" 0 1
+	$rz_wget -O "$repoz_tmp/$rz_packtype/$rz_packtoget/$rz_postfix" "$rz_serv/$rz_packtype/$rz_packtoget/$rz_postfix"
+else
+. $repoz_content/upd_list.sh -afterselect
+fi
+fi
+}
+
+MD5sumChecker()
+{
 # MD5CHECK START
 		if [ "$rz_md5sum" != "" ]
 		then
@@ -42,14 +74,17 @@ then
 
 		fi
 # MD5CHECK END
+}
 
+
+if [ "$cached" = "false" ]
+then
+rz_getapponline
 else
-	
-# INSTALL
-rzdoinstall$rzPtype
-# INSTALL
-
+rz_getappcache
 fi
 
-. $repoz_content/repoZITO.sh
+MD5sumChecker
+
+. $repoz_content/upd_list.sh -afterselect
 

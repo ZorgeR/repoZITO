@@ -25,5 +25,8 @@ case $ret in
 		;;
 esac
 
+# update curent server
+rz_serv=`cat $repoz_content/reposerv`
+
 . $repoz_content/repoZITO.sh
 
